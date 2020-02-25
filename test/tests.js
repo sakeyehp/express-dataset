@@ -1,17 +1,17 @@
-var chai = require('chai');
-var chaiHttp = require('chai-http');
-var server = require('../app');
-var should = chai.should();
-var expect = chai.expect;
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const server = require('../app');
+const should = chai.should();
+const expect = chai.expect;
 chai.use(chaiHttp);
-var Promise = require("bluebird");
-var chaiAsPromised = require("chai-as-promised");
+const Promise = require("bluebird");
+const chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised);
 const fs = require('fs');
 const path = require('path');
 const dir = './test/data/';
 const testFolder = './test/data';
-let testCaseNames = fs.readFileSync(dir + 'description.txt', 'utf8').toString().split('\n');
+const testCaseNames = fs.readFileSync(`${dir} description.txt`, 'utf8').toString().split('\n');
 
 
 describe('git_test ', function() {
@@ -22,7 +22,7 @@ describe('git_test ', function() {
 		if (file[0] != '.' && file != 'description.txt') {
 			it(testCaseNames[id], (done) => {
 				let i = 0;
-				let event = [];
+				const event = [];
 				fs.readFileSync(dir + file, 'utf8').toString().split('\n').forEach(function (line) {
 					i += 1;
 					if (line) {
@@ -30,7 +30,7 @@ describe('git_test ', function() {
 					}	
 				});
 				Promise.mapSeries(event, (e) => {
-					let eve = JSON.parse(e);
+					const eve = JSON.parse(e);
 					if(eve.request.method == "DELETE") {
 						return chai.request(server)
 							.delete(eve.request.url)
@@ -75,11 +75,11 @@ describe('git_test ', function() {
 
 				}).then((results) => {
 					for (let j = 0; j < results.length; j++) {
-						let e = JSON.parse(event[j]);
+						const e = JSON.parse(event[j]);
 						if(e.request.method == "GET") {
 							results[j].should.have.status(e.response.status_code);
-							let ar1 = results[j].body;
-							let ar2 = e.response.body;
+							const ar1 = results[j].body;
+							const ar2 = e.response.body;
 							if(e.response.status_code == 404) {
 								continue;
 							}
