@@ -21,10 +21,15 @@ const getAllActors = async (req, res) => {
       order: [
         [Sequelize.literal('eventCount'), 'DESC'],
         [Sequelize.literal('latestEvent'), 'DESC'],
-        ['login', 'DESC'],
+        ['login'],
       ],
   });
-  return res.status(200).send(actors);
+  const modifiedActors = actors.map(actor => ({
+    id: actor.id,
+    login: actor.login,
+    avatar_url: actor.avatar_url,
+  }));
+  return res.status(200).send(modifiedActors);
 };
 
 module.exports = getAllActors;
