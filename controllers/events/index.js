@@ -1,25 +1,12 @@
-
-const getAllEvents = () => {
-
-};
-
-const addEvent = () => {
-
-};
-
-
-const getByActor = () => {
-
-};
-
-
-const eraseEvents = () => {
-
-};
+const addEvent = require('./addEvent');
+const getAllEvents = require('./getAllEvents');
+const getByActor = require('./getByActor');
+const eraseEvents = require('./eraseEvents');
+const { expressErrorHandler } = require('../../services/errorHandler');
 
 module.exports = {
-	getAllEvents,
-	addEvent,
-	getByActor,
-	eraseEvents,
+  getAllEvents: expressErrorHandler(getAllEvents),
+  addEvent: expressErrorHandler(addEvent),
+  getByActor: expressErrorHandler(getByActor),
+  eraseEvents: expressErrorHandler(eraseEvents),
 };

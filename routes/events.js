@@ -3,5 +3,8 @@ const router = express.Router();
 
 // Routes related to event
 
+router.get('/', getAllEvents);
+router.post('/', addEvent);
+
 
 module.exports = router;

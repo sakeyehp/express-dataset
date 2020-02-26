@@ -9,7 +9,7 @@ const sequelize = new Sequelize('dataset-db', 'user', 'password', {
     acquire: 30000,
     idle: 10000,
   },
-  storage: '../../data/db/database.sqlite',
+  storage: './db/database.sqlite3',
   operatorsAliases: false,
 });
 
@@ -20,6 +20,14 @@ sequelize
   })
   .catch((err) => {
     console.error('Unable to connect to database', err);
+  });
+
+  sequelize.sync()
+  .then(() => {
+    console.info('Tables created successfully.');
+  })
+  .catch((err) => {
+    console.info('Error', err);
   });
 
 module.exports = sequelize;
