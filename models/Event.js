@@ -22,4 +22,6 @@ const Event = sequelize.define('event', {
 Event.belongsTo(Actor);
 Event.belongsTo(Repo);
 
+Actor.hasMany(Event);
+
 module.exports = Event;

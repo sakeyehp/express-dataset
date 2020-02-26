@@ -5,7 +5,7 @@ const router = express.Router();
 // Routes related to actor.
 router.get('/', getAllActors);
 router.put('/', updateActor);
-router.put('/streak', getStreak);
+router.get('/streak', getStreak);
 
 
 
