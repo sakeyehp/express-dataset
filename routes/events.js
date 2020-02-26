@@ -5,6 +5,8 @@ const router = express.Router();
 
 router.get('/', getAllEvents);
 router.post('/', addEvent);
+router.delete('/', deleteEvent);
+router.get('/actors/:id', getByActor);
 
 
 module.exports = router;
